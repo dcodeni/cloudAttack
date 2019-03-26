@@ -45,17 +45,14 @@ Run "node cloudattack.js --attack yoursite --threads 5"
   - npm install cloudscraper
   
 
-version 1.0
-
-
 ## Our contributors 
  - [D-Code](https://github.com/dcodeni)
  - [Azmyoel](https://github.com/azmyoel)
  - [YottaiQ](https://github.com/yottaiq)
  
- 
+
+Cloud Attack
+version 1.0
 
 Twitter: @AnonGuegue
  
- 
-  
