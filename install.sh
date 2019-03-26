@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #Sysupdate
-sudo apt update
+apt update
 #!/usr/bin/env bash
 print_title() {
         BOLD=$(tput bold ; tput setaf 2)
@@ -17,9 +17,9 @@ print_title() {
 #Install Node Js
 if ! [ -x "$(command -v npm)" ]; then
     print_title "[~] Instalando NodeJS ..."
-    sudo apt install curl
+    apt install curl
     curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
-    sudo apt install -y nodejs
+    apt install -y nodejs
 else
     print_title "[+] NodeJS está instalado"
 fi 
