@@ -31,8 +31,9 @@ Usage
 
 1. cd cloudAttack
 2. npm install
-3. set new target on index.js
-4. run "node index.js"
+3. instalar dependencia npm install minimist
+4. instalar dependencia npm install cloudscraper
+5. ejecutar "node index.js --site url --threads xx" (ejemplo: node index.js --site "https://www.guatemala.gob.gt" --threads 1000)
 ```
 
 version 0.1

