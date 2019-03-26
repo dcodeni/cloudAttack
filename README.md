@@ -33,14 +33,14 @@ Install on Kali/Debian
 1. git clone https://github.com/dcodeni/cloudAttack.git
 2. cd cloudAttack
 3. chmod +x install.sh && ./install.sh
-4. Run "node index.js --site yoursite --threads 5"
+4. Run "node cloudattack.js --attack yoursite --threads 5"
 
-(Example: node index.js --site "https://www.badsite.com" --threads 500)
+(Example: node cloudattack.js --attack "https://www.badsite.com" --threads 500)
 ```
 
 version 1.0
 
-## Kudos to contributors 
+## Our contributors 
  - [D-Code](https://github.com/dcodeni)
  - [Azmyoel](https://github.com/azmyoel)
  - [YottaiQ](https://github.com/yottaiq)
