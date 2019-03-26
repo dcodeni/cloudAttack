@@ -9,6 +9,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "cloudscraper": "^3.3.0"
+    "cloudscraper": "^3.3.0",
+    "fs": "0.0.1-security",
+    "minimist": "^1.2.0",
+    "p-limit": "^2.2.0",
+    "request": "^2.88.0"
   }
 }
