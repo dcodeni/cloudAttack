@@ -1,10 +1,8 @@
 #!/bin/bash
+
 #Sysupdate
-print_title "[~] Se requiere actualizar tu sistema"
 sudo apt update
-
 #!/usr/bin/env bash
-
 print_title() {
         BOLD=$(tput bold ; tput setaf 2)
         NORMAL=$(tput sgr0)
@@ -18,11 +16,12 @@ print_title() {
 
 #Install Node Js
 if ! [ -x "$(command -v npm)" ]; then
-    print_title "[~] Install NodeJS ..."
+    print_title "[~] Instalando NodeJS ..."
+    sudo apt install curl
     curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
-    apt install -y nodejs
+    sudo apt install -y nodejs
 else
-    print_title "[+] NodeJS esta instalado"
+    print_title "[+] NodeJS está instalado"
 fi 
 
 print_title "[~] Instalando paquetes necesarios"
@@ -34,3 +33,4 @@ npm install minimist
 npm install cloudscraper
 
 print_title "[~] Los paquetes han sido instalados"
+
