@@ -18,9 +18,15 @@ print_title() {
 if ! [ -x "$(command -v npm)" ]; then
     print_title "[~] Instalando NodeJS ..."
     apt install curl
-    curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
-    apt install -y nodejs
-    apt install npm
+    apt-get install curl software-properties-common
+    curl -sL https://deb.nodesource.com/setup_11.x | sudo -E bash -
+    apt-get install -y nodejs
+    apt-get install gcc g++ make
+    curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+    echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+    apt-get update && sudo apt-get install yarn
+    apt-get install npm
+    
 else
     print_title "[+] NodeJS está instalado"
 fi 
