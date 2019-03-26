@@ -1,6 +1,7 @@
 #!/bin/bash
 #Sysupdate
-sudo apt-get update
+print_title "[~] Se requiere actualizar tu sistema"
+sudo apt update
 
 #!/usr/bin/env bash
 
@@ -19,19 +20,17 @@ print_title() {
 if ! [ -x "$(command -v npm)" ]; then
     print_title "[~] Install NodeJS ..."
     curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
-    sudo apt-get install -y nodejs
+    apt install -y nodejs
 else
     print_title "[+] NodeJS esta instalado"
 fi 
 
-print_title "[~] Instalando otros requerimientos necesarios"
+print_title "[~] Instalando paquetes necesarios"
 #dependencias node
-sudo npm install
+npm install
 #dependencias minimist
-sudo npm install minimist
+npm install minimist
 #dependencia cloudscraper
 npm install cloudscraper
 
 print_title "[~] Los paquetes han sido instalados"
-
-
