@@ -51,8 +51,7 @@ Run "node cloudattack.js --attack yoursite --threads 5"
  - [YottaiQ](https://github.com/yottaiq)
  
 
-Cloud Attack
-version 1.0
+Version 1.0
 
 Twitter: @AnonGuegue
  
