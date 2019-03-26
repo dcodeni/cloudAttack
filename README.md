@@ -39,7 +39,7 @@ Usage
 (Example: node index.js --site "https://www.badsite.com" --threads 500)
 ```
 
-version 0.1
+version 0.3.26
 
 ## Kudos to contributors 
  - [D-Code](https://github.com/dcodeni)
