@@ -28,7 +28,7 @@ In general, Cloudflare has 4 types of _common_ anti-bot pages:
 Usage
 ============
 ```javascript
-#### Install on Kali/Debian
+Install on Kali/Debian
 
 1. git clone https://github.com/dcodeni/cloudAttack.git
 2. cd cloudAttack
@@ -38,7 +38,7 @@ Usage
 (Example: node index.js --site "https://www.badsite.com" --threads 500)
 ```
 
-version 0.3.26
+version 1.0
 
 ## Kudos to contributors 
  - [D-Code](https://github.com/dcodeni)
