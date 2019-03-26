@@ -43,8 +43,8 @@ version 0.1
  - [YottaiQ](https://github.com/yottaiq)
  
  
- #x4Anon Team
- Twitter: @AnonGuegue
+
+Twitter: @AnonGuegue
  
  
   
