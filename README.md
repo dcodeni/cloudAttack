@@ -9,7 +9,7 @@ It is a simply script with a library to bypass Cloudflare anti-ddos page, build 
 [![Dependency Status](https://img.shields.io/david/codemanki/cloudscraper.svg?style=flat-square)](https://david-dm.org/codemanki/cloudscraper)
 [![Greenkeeper badge](https://badges.greenkeeper.io/codemanki/cloudscraper.svg?style=flat-square)](https://greenkeeper.io/)
 
-This library is a port of python module [cloudflare-scrape](https://github.com/Anorov/cloudflare-scrape) with couple enhancements and test cases ;)
+This library is a port of python module cloudflare-scrape with couple enhancements and test cases ;)
 . All grats to its author \m/
 
 If the page you want to access is protected by Cloudflare, it will return special page, which expects client to support Javascript to solve challenge.
@@ -28,13 +28,12 @@ In general, Cloudflare has 4 types of _common_ anti-bot pages:
 Usage
 ============
 ```javascript
+#### Install on Kali/Debian
 
 1. git clone https://github.com/dcodeni/cloudAttack.git
 2. cd cloudAttack
-3. npm install
-4. npm install minimist
-5. npm install cloudscraper
-6. Run "node index.js --site yoursite --threads 5"
+3. chmod +x install.sh && ./install.sh
+4. Run "node index.js --site yoursite --threads 5"
 
 (Example: node index.js --site "https://www.badsite.com" --threads 500)
 ```
