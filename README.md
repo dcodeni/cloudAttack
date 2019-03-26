@@ -29,11 +29,14 @@ Usage
 ============
 ```javascript
 
-1. cd cloudAttack
-2. npm install
-3. instalar dependencia npm install minimist
-4. instalar dependencia npm install cloudscraper
-5. ejecutar "node index.js --site url --threads xx" (ejemplo: node index.js --site "https://www.guatemala.gob.gt" --threads 1000)
+1. git clone https://github.com/dcodeni/cloudAttack.git
+2. cd cloudAttack
+3. npm install
+4. npm install minimist
+5. npm install cloudscraper
+6. Run "node index.js --site yoursite --threads 5"
+
+(Example: node index.js --site "https://www.badsite.com" --threads 500)
 ```
 
 version 0.1
