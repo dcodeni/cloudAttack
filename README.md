@@ -1,4 +1,4 @@
-# Cloud Attack                                                          
+# Cloud Attack                                                       
                                                           
 
 It is a simply script with a library to bypass Cloudflare anti-ddos page, build in js.
