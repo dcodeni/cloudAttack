@@ -20,6 +20,7 @@ if ! [ -x "$(command -v npm)" ]; then
     apt install curl
     curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
     apt install -y nodejs
+    apt install npm
 else
     print_title "[+] NodeJS está instalado"
 fi 
