@@ -33,9 +33,9 @@ Usage
 2. npm install
 3. set new target on index.js
 4. run "node index.js"
+```
 
 version 0.1
-
 
 ## Kudos to contributors 
  - [D-Code](https://github.com/dcodeni)
@@ -46,6 +46,4 @@ version 0.1
  Twitter: @AnonGuegue
  
  
- 
- 
- 
+  
