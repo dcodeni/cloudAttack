@@ -25,7 +25,7 @@ In general, Cloudflare has 4 types of _common_ anti-bot pages:
   - Page with error ( your ip was banned, etc)
   
 
-Install
+Usage
 ============
 ```javascript
 
@@ -35,3 +35,17 @@ Install
 4. run "node index.js"
 
 version 0.1
+
+
+## Kudos to contributors 
+ - [D-Code](https://github.com/dcodeni)
+ - [Azmyoel](https://github.com/azmyoel)
+ - [YottaiQ](https://github.com/yottaiq)
+ 
+ #x4Anon Team
+ Twitter: @AnonGuegue
+ 
+ 
+ 
+ 
+ 
