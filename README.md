@@ -7,4 +7,4 @@ Build in js. It makes bypass in CloudFlare
 3. set new target on index.js
 4. run "node index.js"
 
-version 0.02
+version 0.1
