@@ -43,8 +43,10 @@ Run "node cloudattack.js --attack yoursite --threads 5"
   1 - npm install
   2 - npm install minimist
   3 - npm install cloudscraper
+  
 
 version 1.0
+
 
 ## Our contributors 
  - [D-Code](https://github.com/dcodeni)
