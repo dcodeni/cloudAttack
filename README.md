@@ -37,7 +37,7 @@ chmod +x install.sh
 ./install.sh or bash install.sh
 Run "node cloudattack.js --attack yoursite --threads 5 "
 (Example: node cloudattack.js --attack "https://www.badsite.com" --threads 500)
-opcional: --updateproxy true --checkproxy true
+opcional: --proxy true --updateproxy true
 ```
 
 ## Dependencias:
