@@ -33,11 +33,9 @@ function createThread() {
       let options = { uri: site };
 
       if (useProxy) {
-        let index = getRandomInt(globalProxies.length);
-        // options.proxy = globalProxies[index];
-        // options.tunnel = false;
-        options.agent = new HttpsProxyAgent(globalProxies[index]);
+        options.agent = new HttpsProxyAgent(globalProxies[getRandomInt(globalProxies.length)]);
       }
+
       cloudscraper.get(options, function (error, response, body) {
         if (error) {
           resolve('Error');
@@ -58,12 +56,6 @@ async function infiniteThread() {
     } catch (e) {
     }
   }
-  // try {
-  //   await createThread();
-  // } catch (e) {
-  // }
-
-  // infiniteThread();
 }
 
 async function loadProxies() {
