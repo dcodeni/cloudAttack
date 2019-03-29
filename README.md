@@ -1,7 +1,7 @@
 # Cloud Attack                                                       
                                                           
 
-It is a simply script with a library to bypass Cloudflare anti-ddos page, build in js.
+It is a simply script with a library to bypass Cloudflare UAN anti-ddos page, build in js.
 
 [![js-semistandard-style](https://cdn.rawgit.com/flet/semistandard/master/badge.svg)](https://github.com/Flet/semistandard)
 
@@ -34,10 +34,13 @@ Install on Kali/Debian
 git clone https://github.com/dcodeni/cloudAttack.git
 cd cloudAttack
 chmod +x install.sh
-./install.sh or bash install.sh
-Run "node cloudattack.js --attack yoursite --threads 5 "
-(Example: node cloudattack.js --attack "https://www.badsite.com" --threads 500)
-opcional: --proxy true --updateproxy true
+./install.sh
+
+Run: node cloudattack.js --attack "yoursite" --threads 500 
+Proxys: --proxy true --updateproxy true
+
+
+Example: node cloudattack.js --attack "https://www.acloudflaresite.com" --threads 1000 --proxy true
 ```
 
 ## Dependencias:
