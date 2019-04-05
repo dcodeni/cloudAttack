@@ -9,7 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "cloudscraper": "^3.3.0",
+    "cloudscraper": "^3.6.0",
     "fs": "0.0.1-security",
     "https-proxy-agent": "^2.2.1",
     "minimist": "^1.2.0",

